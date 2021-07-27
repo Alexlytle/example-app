@@ -44,10 +44,52 @@ use Illuminate\Support\Facades\Route;
     // $result = DB::table('comments')->where('content', 'content')->exists();
     // $result = DB::table('comments')->where('content', 'content')->doesntExist();
 
-    dump($comments);
+    // dump($comments);
+/*
+|------------------------------------------------------------------------
+| WHERE  part 1 sql clause 
+|------------------------------------------------------------------------
+| where() if there is only two arguments inside the where clause you are checking if its equal, 
+| there can check for less than or greater than
+| where([]) the arrays inside work like the "AND" operator
+| orWhere works like the "OR" operator
+| orWhere with and aynounmous function what this does is groups the condition together 
+|   So picture the statement to read like this. 
+|   Select all from rooms where the price is < 400 or (room_size>1 and room_size < 4)
+*/
 
+    // $result = DB::table('rooms')->get();
+    // $result = DB::table('rooms')->where('price','<',200)->get(); // = like, etc.
 
+    // $result = DB::table('rooms')->where([
+    //     ['room_size', '2'],
+    //     ['price', '<', '400'],
+    // ])->get();
 
+    //  $result = DB::table('rooms')
+    //     ->where('room_size' ,'2')
+    //     ->orWhere('price', '<' ,'400')
+    //     ->get();
+
+    // $result = DB::table('rooms')
+    //         ->where('price', '<' ,'400')
+    //         ->orWhere(function($query) {
+    //             $query->where('room_size', '>' ,'1')
+    //                   ->where('room_size', '<' ,'4');
+    //         })
+    //         ->get();
+
+    // dump($result);
+
+/*
+|--------------------------------
+| Part Two of where clause
+|--------------------------------
+|  whereNotIn() looking for rooms where the room size is not 1-3
+|  whereExists() allows  you to check multipl tables and see if the data exists
+|   ex: Looking for users who made reservations where checkin is a certian date
+|
+*/
 
     // $result = DB::table('rooms')
     //         ->whereBetween('room_size',[1,3]) // whereNotBetween
@@ -86,7 +128,14 @@ use Illuminate\Support\Facades\Route;
     //        })
     //        ->get();
 
-    // dump($result);
+/*
+|--------------------------------
+| Part Three of where clause
+|--------------------------------
+|
+*/
+
+    dump($result);
 Route::get('/', function () {
     return view('welcome');
 });
